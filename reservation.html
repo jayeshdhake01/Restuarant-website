@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Reservation - The Legend Veg Dining</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">The Legend Veg Dining</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="menu.html">Order</a>
+    <a href="reservation.html">Reservation</a>
+  </nav>
+</header>
+
+<section class="section">
+  <h2>Reserve Your Table</h2>
+</section>
+
+<div class="reservation-box">
+
+  <input type="text" id="resName" placeholder="Your Name">
+  <input type="tel" id="resPhone" placeholder="Phone Number">
+
+  <select id="resGuests">
+    <option value="">Number of Guests</option>
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+    <option>5+</option>
+  </select>
+
+  <input type="date" id="resDate">
+
+  <select id="resTime">
+    <option value="">Select Time Slot</option>
+    <option>12:00 PM - 2:00 PM</option>
+    <option>2:00 PM - 4:00 PM</option>
+    <option>6:00 PM - 8:00 PM</option>
+    <option>8:00 PM - 10:00 PM</option>
+  </select>
+
+  <button class="btn" onclick="bookTable()">Confirm Reservation</button>
+
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
