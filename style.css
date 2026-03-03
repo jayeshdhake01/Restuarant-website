@@ -1,0 +1,144 @@
+:root {
+--accent:#8b0000;
+--gold:#c9a227;
+--bg:#f8f5f2;
+--text:#222;
+--card:#ffffff;
+}
+
+body.dark{
+--bg:#121212;
+--text:#f5f5f5;
+--card:#1e1e1e;
+}
+
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:var(--bg);
+color:var(--text);
+}
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 20px;
+background:var(--accent);
+color:white;
+}
+
+.navbar a{
+color:white;
+text-decoration:none;
+margin-left:15px;
+font-weight:600;
+}
+
+.logo{
+font-family:'Cinzel',serif;
+font-size:20px;
+font-weight:700;
+}
+
+.hero{
+text-align:center;
+padding:60px 20px;
+background:linear-gradient(135deg,#8b0000,#5a0000);
+color:white;
+}
+
+.btn{
+background:var(--gold);
+color:black;
+padding:8px 15px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-weight:600;
+}
+
+.btn-outline{
+border:2px solid var(--gold);
+color:var(--gold);
+padding:8px 15px;
+border-radius:6px;
+text-decoration:none;
+}
+
+.section{
+padding:40px 20px;
+text-align:center;
+}
+
+.card{
+background:var(--card);
+padding:15px;
+border-radius:12px;
+margin:10px auto;
+max-width:500px;
+box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+.menu-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:15px;
+padding:20px;
+}
+
+.cart-box{
+position:fixed;
+bottom:15px;
+right:15px;
+width:260px;
+background:var(--card);
+padding:15px;
+border-radius:10px;
+box-shadow:0 4px 15px rgba(0,0,0,0.2);
+max-height:60vh;
+overflow-y:auto;
+}
+
+.cart-item{border-bottom:1px solid #ccc;padding:5px 0;}
+.qty-controls{display:flex;gap:5px;}
+
+.reservation-box{
+max-width:400px;
+margin:20px auto;
+display:flex;
+flex-direction:column;
+gap:12px;
+padding:20px;
+background:var(--card);
+border-radius:10px;
+}
+
+.tracker{
+max-width:400px;
+margin:20px auto;
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.track-step{
+padding:12px;
+background:var(--card);
+border-radius:8px;
+opacity:0.5;
+transition:0.3s;
+}
+
+.track-step.active{
+background:var(--gold);
+opacity:1;
+}
+
+.footer{
+text-align:center;
+padding:20px;
+background:var(--accent);
+color:white;
+margin-top:40px;
+}
