@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Trips - Wanderlust</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Wanderlust</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="trips.html">Trips</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1>Luxury Collection</h1>
+        <button onclick="showAdminLogin()" style="position: absolute; top: 10px; right: 20px; background: none; border: none; color: #D4AF37; cursor: pointer; font-size: 1.2rem; opacity: 0.6;" title="Admin Only">⚙️</button>
+    </section>
+
+    <div id="adminLoginModal" class="modal" style="display: none;">
+        <div class="modal-content" style="max-width: 350px;">
+            <span class="close" onclick="closeAdminLogin()">&times;</span>
+            <h2>Admin Login</h2>
+            <p style="color: #666; margin-bottom: 1rem;">Enter password to access admin panel</p>
+            <input type="password" id="adminPassword" placeholder="Enter password" style="padding: 0.8rem; width: 100%; border: 1px solid #ddd; border-radius: 4px;">
+            <button onclick="checkAdminPassword()" class="btn-small" style="margin-top: 1rem; width: 100%;">Login</button>
+            <p style="font-size: 0.8rem; margin-top: 0.5rem; color: #999;">Demo password: <strong>admin123</strong></p>
+        </div>
+    </div>
+
+    <div id="adminPanelModal" class="modal" style="display: none;">
+        <div class="modal-content" style="max-width: 500px;">
+            <span class="close" onclick="closeAdminPanel()">&times;</span>
+            <h2>Add New Trip</h2>
+            <p style="color: #D4AF37; margin-bottom: 1rem;">✨ In the real website, you can do this yourself!</p>
+            
+            <form id="addTripForm" onsubmit="addNewTrip(event)">
+                <label for="tripTitle">Trip Title *</label>
+                <input type="text" id="tripTitle" placeholder="e.g., Japan Cherry Blossom Tour" required>
+                
+                <label for="tripImage">Image URL *</label>
+                <input type="url" id="tripImage" placeholder="https://images.unsplash.com/..." required>
+                <p style="font-size: 0.7rem; color: #999;">Use Unsplash URLs: unsplash.com</p>
+                
+                <label for="tripDuration">Duration & Price *</label>
+                <input type="text" id="tripDuration" placeholder="8 days • ₹3,50,000" required>
+                
+                <label for="tripDescription">Short Description *</label>
+                <textarea id="tripDescription" rows="2" placeholder="Brief description..." required></textarea>
+                
+                <label for="tripHighlights">Highlights (comma separated)</label>
+                <input type="text" id="tripHighlights" placeholder="Temples • Cherry blossoms • Tea ceremony">
+                
+                <label for="tripFullDescription">Full Description (Optional)</label>
+                <textarea id="tripFullDescription" rows="3" placeholder="Detailed description..."></textarea>
+                
+                <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">Add Trip to Demo</button>
+            </form>
+        </div>
+    </div>
+
+    <section class="trip-list">
+        <div class="trip-grid" id="tripGrid">
+            <div class="trip-card" data-trip="maldives">
+                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=400" alt="Maldives">
+                <h3>Maldives Private Island</h3>
+                <p>7 days • ₹2,50,000</p>
+                <p>Experience ultimate privacy in your own overwater villa. Private butler, candlelit dinners, and spa treatments.</p>
+                <p><strong>Highlights:</strong> Private villa • Personal butler • Dolphin cruise • Underwater restaurant</p>
+                <button onclick="openReservationForm('maldives')" class="btn-small">Reserve This Trip</button>
+            </div>
+            <div class="trip-card" data-trip="swiss">
+                <img src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=400" alt="Switzerland">
+                <h3>Swiss Alps Chalet Retreat</h3>
+                <p>10 days • ₹3,75,000</p>
+                <p>Private chalet with mountain views, personal chef, outdoor hot tub, and helicopter transfers.</p>
+                <p><strong>Highlights:</strong> Helicopter transfers • Ski instructor • Hot tub • Gourmet cuisine</p>
+                <button onclick="openReservationForm('swiss')" class="btn-small">Reserve This Trip</button>
+            </div>
+            <div class="trip-card" data-trip="kenya">
+                <img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=400" alt="Safari">
+                <h3>Kenya Luxury Safari</h3>
+                <p>12 days • ₹4,50,000</p>
+                <p>Lavish tented camps, private game drives, bush breakfasts, and Maasai cultural experiences.</p>
+                <p><strong>Highlights:</strong> Private game drives • Bush breakfasts • Balloon safari • Maasai culture</p>
+                <button onclick="openReservationForm('kenya')" class="btn-small">Reserve This Trip</button>
+            </div>
+        </div>
+    </section>
+
+    <div id="reservationModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeReservationForm()">&times;</span>
+            <h2>Reservation Enquiry</h2>
+            <p id="selectedTripDisplay" style="color: #D4AF37; font-weight: bold;"></p>
+            
+            <form id="reservationForm" action="https://formspree.io/f/xqeyeqkv" method="POST">
+                <input type="hidden" name="trip" id="selectedTripId" value="">
+                <input type="hidden" name="trip_name" id="selectedTripName" value="">
+                
+                <label for="resName">Full Name *</label>
+                <input type="text" id="resName" name="name" placeholder="Enter your full name" required>
+                
+                <label for="resEmail">Email Address *</label>
+                <input type="email" id="resEmail" name="email" placeholder="your@email.com" required>
+                
+                <label for="resPhone">Phone Number *</label>
+                <input type="tel" id="resPhone" name="phone" placeholder="+91 98765 43210" required>
+                
+                <label for="resTravelers">Number of Travelers</label>
+                <input type="number" id="resTravelers" name="travelers" min="1" value="2">
+                
+                <label for="resDate">Preferred Dates</label>
+                <input type="text" id="resDate" name="dates" placeholder="e.g., December 2025">
+                
+                <label for="resRequests">Special Requests</label>
+                <textarea id="resRequests" name="requests" rows="3" placeholder="Any specific requirements..."></textarea>
+                
+                <button type="submit" class="btn" style="width: 100%;">Submit Enquiry</button>
+                <p style="font-size: 0.8rem; margin-top: 1rem; text-align: center; color: #666;">We'll contact you within 24 hours</p>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Wanderlust Luxury Travels. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function showAdminLogin() {
+            document.getElementById('adminLoginModal').style.display = 'block';
+        }
+        function closeAdminLogin() {
+            document.getElementById('adminLoginModal').style.display = 'none';
+        }
+        function checkAdminPassword() {
+            var password = document.getElementById('adminPassword').value;
+            if (password === 'admin123') {
+                closeAdminLogin();
+                document.getElementById('adminPanelModal').style.display = 'block';
+                document.getElementById('adminPassword').value = '';
+            } else {
+                alert('Incorrect password. Try: admin123');
+            }
+        }
+        function closeAdminPanel() {
+            document.getElementById('adminPanelModal').style.display = 'none';
+        }
+        function addNewTrip(event) {
+            event.preventDefault();
+            var title = document.getElementById('tripTitle').value;
+            var image = document.getElementById('tripImage').value;
+            var duration = document.getElementById('tripDuration').value;
+            var shortDesc = document.getElementById('tripDescription').value;
+            var highlights = document.getElementById('tripHighlights').value || 'Luxury experience • Premium service';
+            var tripId = 'trip_' + Date.now();
+            var newTripCard = document.createElement('div');
+            newTripCard.className = 'trip-card';
+            newTripCard.setAttribute('data-trip', tripId);
+            newTripCard.innerHTML = `
+                <img src="${image}" alt="${title}" onerror="this.src='https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=400'">
+                <h3>${title}</h3>
+                <p>${duration}</p>
+                <p>${shortDesc}</p>
+                <p><strong>Highlights:</strong> ${highlights}</p>
+                <button onclick="openReservationForm('${tripId}')" class="btn-small">Reserve This Trip</button>
+            `;
+            document.getElementById('tripGrid').appendChild(newTripCard);
+            alert('✅ New trip added successfully!');
+            closeAdminPanel();
+            document.getElementById('addTripForm').reset();
+        }
+        function openReservationForm(tripId) {
+            document.getElementById('reservationModal').style.display = 'block';
+            document.getElementById('selectedTripId').value = tripId;
+            var tripCard = document.querySelector(`[data-trip="${tripId}"]`);
+            if (tripCard) {
+                var title = tripCard.querySelector('h3').innerText;
+                document.getElementById('selectedTripDisplay').innerHTML = 'Selected: ' + title;
+                document.getElementById('selectedTripName').value = title;
+            }
+        }
+        function closeReservationForm() {
+            document.getElementById('reservationModal').style.display = 'none';
+        }
+        window.onclick = function(event) {
+            var adminLogin = document.getElementById('adminLoginModal');
+            var adminPanel = document.getElementById('adminPanelModal');
+            var reservation = document.getElementById('reservationModal');
+            if (event.target == adminLogin) adminLogin.style.display = 'none';
+            if (event.target == adminPanel) adminPanel.style.display = 'none';
+            if (event.target == reservation) reservation.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
