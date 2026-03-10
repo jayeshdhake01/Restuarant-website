@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Wanderlust Luxury Travels</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Wanderlust</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="trips.html">Trips</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1>Personalised Service</h1>
+    </section>
+
+    <section class="contact-form">
+        <h2>Your Luxury Travel Concierge</h2>
+        <p style="text-align: center; margin-bottom: 2rem; color: #666;">Fill this form for any questions or custom trip requests</p>
+        
+        <form action="https://formspree.io/f/xqeyeqkv" method="POST">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" placeholder="e.g., John Smith" required>
+
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" required>
+
+            <label for="destination">Preferred Destination</label>
+            <input type="text" id="destination" name="destination" placeholder="e.g., Maldives, Switzerland...">
+
+            <label for="message">Your Message *</label>
+            <textarea id="message" name="message" rows="5" placeholder="Tell us about your dream vacation..." required></textarea>
+
+            <button type="submit" class="btn">Send Enquiry</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Wanderlust Luxury Travels. All rights reserved.</p>
+    </footer>
+</body>
+</html>
